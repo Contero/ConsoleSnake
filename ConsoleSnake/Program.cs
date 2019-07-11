@@ -15,11 +15,11 @@ namespace ConsoleSnake
             bool alive;
             bool taken = false;
             ConsoleKey keyIn;
-            Point head,
-                targetLocation;
+            Point targetLocation;
             Snake snake = new Snake();
             Target target = new Target();
             Screen screen = new Screen(xMax, yMax);
+
             int targetValue;
 
             //game loop
@@ -27,6 +27,10 @@ namespace ConsoleSnake
             {
                 alive = true;
                 snake.Reset();
+                screen.Level = 0;
+                screen.NextLevel();
+                target.Reset();
+
                 //prime targets
                 NextTarget();
 
@@ -73,9 +77,19 @@ namespace ConsoleSnake
                     //got target?
                     if (snake.GetPosition().Equals(targetLocation))
                     {
-                        snake.AddLength(targetValue);
-                        target.ValueUp();
-                        NextTarget();
+                        if (targetValue < 9)
+                        {
+                            snake.AddLength(targetValue * screen.Level);
+                            target.ValueUp();
+                            NextTarget();
+                        }
+                        else
+                        {
+                            screen.NextLevel();
+                            target.Reset();
+                            snake.Reset();
+                            NextTarget();
+                        }
                     }
                 }
 

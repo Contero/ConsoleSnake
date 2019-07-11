@@ -7,13 +7,28 @@ namespace ConsoleSnake
     class Screen
     {
         private List<Point> walls = new List<Point>();
+        private int xMax,
+            yMax;
+        public int Level { get; set;  }
 
-        public Screen(int xMax, int yMax)
-        {
+
+         public Screen(int xMax, int yMax)
+         {
             Console.Title = "Nibbler";
             Console.SetWindowSize(xMax, yMax + 1);
             Console.CursorVisible = false;
             Console.ForegroundColor = ConsoleColor.Green;
+
+            this.xMax = xMax;
+            this.yMax = yMax;
+
+            Level = 0;
+            NextLevel();
+        }
+
+        public void Reset()
+        {
+            Console.Clear();
 
             for (int x = 0; x < xMax; x++)
             {
@@ -30,11 +45,30 @@ namespace ConsoleSnake
                 Console.SetCursorPosition(xMax - 1, y);
                 Console.Write((char)Glyphs.wall);
             }
+
+            Console.SetCursorPosition(1, yMax);
+            Console.Write("Level: ");
         }
 
         public bool Collides(Point point)
         {
             return walls.Contains(point);
+        }
+
+        public void NextLevel()
+        {
+            Level++;
+
+            Reset();
+
+            Console.SetCursorPosition(8, yMax);
+            Console.Write(Level);
+
+            switch (Level)
+            {
+                case 1:
+                    break;
+            }
         }
     }
 }

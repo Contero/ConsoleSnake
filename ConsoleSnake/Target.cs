@@ -16,8 +16,8 @@ namespace ConsoleSnake
 
         public (Point, int) GetTarget()
         {    
-            return (new Point(random.Next(Program.xMax - 1),
-                random.Next(Program.yMax - 1)), value);
+            return (new Point(random.Next(1, Program.xMax - 1),
+                random.Next(1, Program.yMax - 1)), value);
         }
 
         public void ValueUp()
