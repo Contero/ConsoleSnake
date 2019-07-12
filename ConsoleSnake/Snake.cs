@@ -34,8 +34,8 @@ namespace ConsoleSnake
         public void Reset()
         {
             Length = 2;
-            position.xPos = Program.xMax / 2;
-            position.yPos = Program.yMax / 2;
+            position.xPos = (Program.xMax / 2) + 2;
+            position.yPos = (Program.yMax / 2) - 2;
             Direction = 'n';
             body.Clear();
             body.Add(new Point(position.xPos, position.yPos));

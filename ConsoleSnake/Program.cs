@@ -27,7 +27,7 @@ namespace ConsoleSnake
             {
                 alive = true;
                 snake.Reset();
-                screen.Level = 0;
+                screen.Level = 4; //change to 0
                 screen.NextLevel();
                 target.Reset();
 
@@ -69,7 +69,8 @@ namespace ConsoleSnake
                     if (snake.GetX() == 0
                         || snake.GetY() == 0
                         || snake.GetX() == xMax - 1
-                        || snake.GetY() == yMax - 1)
+                        || snake.GetY() == yMax - 1
+                        || screen.Collides(snake.GetPosition()))
                     {
                         alive = false;
                     }
@@ -77,7 +78,7 @@ namespace ConsoleSnake
                     //got target?
                     if (snake.GetPosition().Equals(targetLocation))
                     {
-                        if (targetValue < 9)
+                        if (targetValue < 2)
                         {
                             snake.AddLength(targetValue * screen.Level);
                             target.ValueUp();
