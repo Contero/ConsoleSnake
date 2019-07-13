@@ -80,6 +80,7 @@ namespace ConsoleSnake
                     break;
             }
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(position.xPos, position.yPos);
             Console.Write((char)Glyphs.snake);
 
@@ -95,7 +96,8 @@ namespace ConsoleSnake
                 Point erase = body[0];
                 body.RemoveAt(0);
                 Console.SetCursorPosition(erase.xPos, erase.yPos);
-                Console.Write(' ');
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write((char)Glyphs.snake);
             }
 
             return true;

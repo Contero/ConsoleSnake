@@ -29,6 +29,7 @@ namespace ConsoleSnake
                 screen.Level = 0;
                 screen.NextLevel();
                 Console.SetCursorPosition(67, yMax);
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write(snake.Lives);
 
                 //new life
@@ -64,6 +65,9 @@ namespace ConsoleSnake
                                 case ConsoleKey.RightArrow:
                                     if (snake.Direction != 'w') snake.Direction = 'e';
                                     break;
+                                case ConsoleKey.Escape:
+                                    Environment.Exit(0);
+                                    break;
                             }
                         }
 
@@ -97,6 +101,7 @@ namespace ConsoleSnake
                             {
                                 screen.NextLevel();
                                 Console.SetCursorPosition(67, yMax);
+                                Console.ForegroundColor = ConsoleColor.White;
                                 Console.Write(snake.Lives);
                                 target.Reset();
                                 snake.Reset();
@@ -109,6 +114,7 @@ namespace ConsoleSnake
                     screen.Level--;
                     screen.NextLevel();
                     Console.SetCursorPosition(67, yMax);
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.Write(snake.Lives);
                     target.Reset();
                     snake.Reset();
@@ -145,6 +151,7 @@ namespace ConsoleSnake
                     }
                 } while (taken);
 
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.SetCursorPosition(targetLocation.xPos, targetLocation.yPos);
                 Console.Write(targetValue);
             }

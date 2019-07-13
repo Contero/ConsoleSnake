@@ -20,7 +20,8 @@ namespace ConsoleSnake
             Console.Title = "Nibbler";
             Console.SetWindowSize(xMax, yMax + 1);
             Console.CursorVisible = false;
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.Clear();
 
             this.xMax = xMax;
             this.yMax = yMax;
@@ -35,7 +36,7 @@ namespace ConsoleSnake
         public void Reset()
         {
             Console.Clear();
-
+            Console.ForegroundColor = ConsoleColor.Red;
             for (int x = 0; x < xMax; x++)
             {
                 Console.SetCursorPosition(x, 0);
@@ -52,6 +53,7 @@ namespace ConsoleSnake
                 Console.Write((char)Glyphs.wall);
             }
 
+            Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(1, yMax);
             Console.Write("Level: ");
 
@@ -79,6 +81,8 @@ namespace ConsoleSnake
 
             Console.SetCursorPosition(8, yMax);
             Console.Write(Level);
+
+            Console.ForegroundColor = ConsoleColor.Red;
 
             switch (Level)
             {
