@@ -11,7 +11,10 @@ namespace ConsoleSnake
             yMax;
         public int Level { get; set;  }
 
-
+        /*
+         * Accepts size of the playing field as ints
+         * creates instace of game screen
+         */ 
          public Screen(int xMax, int yMax)
          {
             Console.Title = "Nibbler";
@@ -26,6 +29,9 @@ namespace ConsoleSnake
             NextLevel();
         }
 
+        /*
+         * Resets the screen
+         */ 
         public void Reset()
         {
             Console.Clear();
@@ -48,13 +54,23 @@ namespace ConsoleSnake
 
             Console.SetCursorPosition(1, yMax);
             Console.Write("Level: ");
+
+            Console.SetCursorPosition(60, yMax);
+            Console.Write("Lives: ");
         }
 
+        /*
+         * Accepts a Point
+         * returns true if that point is on a wall
+         */
         public bool Collides(Point point)
         {
             return walls.Contains(point);
         }
 
+        /*
+         * Increases the level property, draws new level, and sets wall point List
+         */
         public void NextLevel()
         {
             Level++;
@@ -67,6 +83,7 @@ namespace ConsoleSnake
             switch (Level)
             {
                 case 1:
+                    walls.Clear();
                     break;
                 case 2:
                     walls.Clear();
@@ -177,6 +194,10 @@ namespace ConsoleSnake
             }
         }
 
+        /*
+         * Accepts X and Y coordinates
+         * prints a wall glyph there and adds coordinates to List of wall points
+         */ 
         private void PutWall(int x, int y)
         {
             Console.SetCursorPosition(x, y);

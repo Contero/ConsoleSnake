@@ -10,39 +10,57 @@ namespace ConsoleSnake
         private Point position;
         private List<Point> body = new List<Point>();
         public char Direction { get;  set; }
-        
+        public int Lives { get; set; }
+
+        /*
+         * Returns X axis coordinate of snake head
+         */
         public int GetX()
         {
             return position.xPos;
         }
 
+        /*
+         * Returns Y axis coordinate of snake head
+         */
         public int GetY()
         {
             return position.yPos;
         }
 
+        /*
+         * Constructor - creats instance of Snake
+         */
         public Snake()
         {
             Reset();
         }
 
+        /*
+         * Accepts a number to increae length by
+         * Increases the length by that amount
+         */
         public void AddLength(int growth)
         {
             Length += growth;
         }
 
+        /**
+         * resets the snake for a new level or life
+         */
         public void Reset()
         {
             Length = 2;
-            position.xPos = (Program.xMax / 2) + 2;
-            position.yPos = (Program.yMax / 2) - 2;
+            position.xPos = (Nibbler.xMax / 2) + 2;
+            position.yPos = (Nibbler.yMax / 2) - 2;
             Direction = 'n';
             body.Clear();
             body.Add(new Point(position.xPos, position.yPos));
         }
 
         /*
-         * Method to move snake
+         * Method to move snake and return false if snake collides with itself, otherwise
+         * return true
          */
         public bool Move()
         {
@@ -84,11 +102,18 @@ namespace ConsoleSnake
 
             }
 
+        /*
+         * Returns position as Point
+         */
         public Point GetPosition()
         {
             return position;
         }
 
+        /*
+         * Accepts a Point
+         * Returns True if that point is on the snake body 
+         */
         public bool Collides(Point point)
         {
             return body.Contains(point);
