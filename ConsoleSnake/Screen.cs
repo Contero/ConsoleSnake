@@ -1,4 +1,5 @@
 ﻿using System;
+using static System.Console;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +8,7 @@ namespace ConsoleSnake
     class Screen
     {
         private List<Point> walls = new List<Point>();
-        private int xMax,
+        private readonly int xMax,
             yMax;
         public int Level { get; set;  }
 
@@ -17,11 +18,11 @@ namespace ConsoleSnake
          */ 
          public Screen(int xMax, int yMax)
          {
-            Console.Title = "Nibbler";
-            Console.SetWindowSize(xMax, yMax + 1);
-            Console.CursorVisible = false;
-            Console.BackgroundColor = ConsoleColor.Blue;
-            Console.Clear();
+            Title = "Nibbler";
+            SetWindowSize(xMax, yMax + 1);
+            CursorVisible = false;
+            BackgroundColor = ConsoleColor.Blue;
+            Clear();
 
             this.xMax = xMax;
             this.yMax = yMax;
@@ -35,30 +36,33 @@ namespace ConsoleSnake
          */ 
         public void Reset()
         {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Red;
+            Clear();
+            ForegroundColor = ConsoleColor.Red;
             for (int x = 0; x < xMax; x++)
             {
-                Console.SetCursorPosition(x, 0);
-                Console.Write((char)Glyphs.wall);
-                Console.SetCursorPosition(x, yMax - 1);
-                Console.Write((char)Glyphs.wall);
+                SetCursorPosition(x, 0);
+                Write((char)Glyphs.wall);
+                SetCursorPosition(x, yMax - 1);
+                Write((char)Glyphs.wall);
             }
 
             for (int y = 0; y < yMax - 1; y++)
             {
-                Console.SetCursorPosition(0, y);
-                Console.Write((char)Glyphs.wall);
-                Console.SetCursorPosition(xMax - 1, y);
-                Console.Write((char)Glyphs.wall);
+                SetCursorPosition(0, y);
+                Write((char)Glyphs.wall);
+                SetCursorPosition(xMax - 1, y);
+                Write((char)Glyphs.wall);
             }
 
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(1, yMax);
-            Console.Write("Level: ");
+            ForegroundColor = ConsoleColor.White;
+            SetCursorPosition(1, yMax);
+            Write("Level:");
 
-            Console.SetCursorPosition(60, yMax);
-            Console.Write("Lives: ");
+            SetCursorPosition(30, yMax);
+            Write("Score:");
+
+            SetCursorPosition(60, yMax);
+            Write("Lives:");
         }
 
         /*
@@ -79,10 +83,10 @@ namespace ConsoleSnake
 
             Reset();
 
-            Console.SetCursorPosition(8, yMax);
-            Console.Write(Level);
+            SetCursorPosition(8, yMax);
+            Write(Level);
 
-            Console.ForegroundColor = ConsoleColor.Red;
+            ForegroundColor = ConsoleColor.Red;
 
             switch (Level)
             {
@@ -204,8 +208,8 @@ namespace ConsoleSnake
          */ 
         private void PutWall(int x, int y)
         {
-            Console.SetCursorPosition(x, y);
-            Console.Write((char)Glyphs.wall);
+            SetCursorPosition(x, y);
+            Write((char)Glyphs.wall);
             walls.Add(new Point(x, y));
         }
     }

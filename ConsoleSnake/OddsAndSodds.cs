@@ -31,4 +31,14 @@ namespace ConsoleSnake
         wall = 9619,
         snake = 9608
     }
+    /*
+     * Enum to hold cardinal directions
+     */
+    enum Direction
+    {
+        North,
+        South,
+        East,
+        West
+    }
 }

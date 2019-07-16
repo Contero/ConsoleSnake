@@ -10,7 +10,6 @@ namespace ConsoleSnake
 
         static void Main(string[] args)
         {
-
             char playAgain = 'Y';
             bool alive;
             bool taken = false;
@@ -31,6 +30,8 @@ namespace ConsoleSnake
                 Console.SetCursorPosition(67, yMax);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write(snake.Lives);
+                snake.ResetScore();
+                snake.PrintScore();
 
                 //new life
                 while (snake.Lives > 0)
@@ -54,16 +55,16 @@ namespace ConsoleSnake
                             switch (keyIn)
                             {
                                 case ConsoleKey.UpArrow:
-                                    if (snake.Direction != 's') snake.Direction = 'n';
+                                    if (snake.Direction != Direction.South) snake.Direction = Direction.North;
                                     break;
                                 case ConsoleKey.DownArrow:
-                                    if (snake.Direction != 'n') snake.Direction = 's';
+                                    if (snake.Direction != Direction.North) snake.Direction = Direction.South;
                                     break;
                                 case ConsoleKey.LeftArrow:
-                                    if (snake.Direction != 'e') snake.Direction = 'w';
+                                    if (snake.Direction != Direction.East) snake.Direction = Direction.West;
                                     break;
                                 case ConsoleKey.RightArrow:
-                                    if (snake.Direction != 'w') snake.Direction = 'e';
+                                    if (snake.Direction != Direction.West) snake.Direction = Direction.East;
                                     break;
                                 case ConsoleKey.Escape:
                                     Environment.Exit(0);
@@ -94,17 +95,20 @@ namespace ConsoleSnake
                             if (targetValue < 9)
                             {
                                 snake.AddLength(targetValue * screen.Level);
+                                snake.AddScore(screen.Level, targetValue);
                                 target.ValueUp();
                                 NextTarget();
                             }
                             else
                             {
+                                snake.AddScore(screen.Level, targetValue);
                                 screen.NextLevel();
                                 Console.SetCursorPosition(67, yMax);
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.Write(snake.Lives);
                                 target.Reset();
                                 snake.Reset();
+                                snake.PrintScore();
                                 NextTarget();
                             }
                         }
@@ -118,6 +122,7 @@ namespace ConsoleSnake
                     Console.Write(snake.Lives);
                     target.Reset();
                     snake.Reset();
+                    snake.PrintScore();
                 }
 
                 CenterText(5, "Play Again (Y/N)");
@@ -168,11 +173,7 @@ namespace ConsoleSnake
 
             Console.SetCursorPosition(xPosition, row);
             Console.Write(message);
-
         }
-
-
-
     }
 }
 

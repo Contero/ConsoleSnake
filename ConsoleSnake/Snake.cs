@@ -9,8 +9,9 @@ namespace ConsoleSnake
         private int Length;
         private Point position;
         private List<Point> body = new List<Point>();
-        public char Direction { get;  set; }
+        public Direction Direction { get; set; }
         public int Lives { get; set; }
+        private int score;
 
         /*
          * Returns X axis coordinate of snake head
@@ -45,7 +46,7 @@ namespace ConsoleSnake
             Length += growth;
         }
 
-        /**
+        /*
          * resets the snake for a new level or life
          */
         public void Reset()
@@ -53,7 +54,7 @@ namespace ConsoleSnake
             Length = 2;
             position.xPos = (Nibbler.xMax / 2) + 2;
             position.yPos = (Nibbler.yMax / 2) - 2;
-            Direction = 'n';
+            Direction = Direction.North;
             body.Clear();
             body.Add(new Point(position.xPos, position.yPos));
         }
@@ -66,16 +67,16 @@ namespace ConsoleSnake
         {
             switch (Direction)
             {
-                case 'n':
+                case Direction.North:
                     position.yPos--;
                     break;
-                case 's':
+                case Direction.South:
                     position.yPos++;
                     break;
-                case 'e':
+                case Direction.East:
                     position.xPos++;
                     break;
-                case 'w':
+                case Direction.West:
                     position.xPos--;
                     break;
             }
@@ -119,6 +120,35 @@ namespace ConsoleSnake
         public bool Collides(Point point)
         {
             return body.Contains(point);
+        }
+
+        /*
+         * Accepts ints for level and target value
+         * Calculates amount to increase score
+         * prints score on screen
+         */
+        public void AddScore(int level, int value)
+        {
+            score += level * value;
+            PrintScore();
+        }
+
+        /*
+         * Resets score to 0
+         */
+         public void ResetScore()
+        {
+            score = 0;
+        }
+
+        /*
+         * Prints score on screen
+         */
+         public void PrintScore()
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(37, Nibbler.yMax);
+            Console.Write(score);
         }
     }
 }
